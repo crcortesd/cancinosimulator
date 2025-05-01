@@ -1,4 +1,17 @@
-const { YCS_DECK } = require("./constants");
+import axios from 'axios';
+
+export const queryYgoProDeck = async (cardId) => {
+  const url = `https://db.ygoprodeck.com/api/v7/cardinfo.php?id=${cardId}`;
+  const response = await axios.get(url);
+  return response.data.data[0];
+};
+
+export const groupDeck = (deck) =>
+  deck.reduce((acc, code) => {
+    const foundCode = acc.find((item) => item.code === code);
+    foundCode ? (foundCode.qty += 1) : acc.push({ code, qty: 1 });
+    return acc;
+  }, []);
 
 const shuffleDeck = (orderedDeck) => {
   // Create a copy of the deck to avoid modifying the original
@@ -12,6 +25,7 @@ const shuffleDeck = (orderedDeck) => {
   }
   return shuffled;
 };
+
 const cancino = () => {
   let coolHands = 0;
   for (let i = 0; i < 10000; i++) {
@@ -19,26 +33,26 @@ const cancino = () => {
     const goingFirstHand = shuffledDeck.slice(0, 5);
     const cardsYouWantInHand = [
       {
-        main: "Silvy of the White Forest",
+        main: 'Silvy of the White Forest',
       },
       {
-        main: "Elzette of the White Forest",
+        main: 'Elzette of the White Forest',
       },
       {
-        main: "Fiendsmith Engraver",
-        ANY: ["Silvy of the White Forest", "Deception of the Sinful Spoils"],
+        main: 'Fiendsmith Engraver',
+        ANY: ['Silvy of the White Forest', 'Deception of the Sinful Spoils'],
       },
       {
-        main: "WANTED: Seeker of Sinful Spoils",
-        ANY: ["Whitches of the White Forest"],
+        main: 'WANTED: Seeker of Sinful Spoils',
+        ANY: ['Whitches of the White Forest'],
       },
       {
-        main: "Diabellstar the Black Witch",
-        ANY: ["Whitches of the White Forest"],
+        main: 'Diabellstar the Black Witch',
+        ANY: ['Whitches of the White Forest'],
       },
       {
-        main: "Deception of the Sinful Spoils",
-        ANY: ["Whitches of the White Forest"],
+        main: 'Deception of the Sinful Spoils',
+        ANY: ['Whitches of the White Forest'],
       },
     ];
 
@@ -66,5 +80,3 @@ const cancino = () => {
   const coolHandsRatios = (coolHands / 10000) * 100;
   console.log(coolHandsRatios);
 };
-
-cancino();

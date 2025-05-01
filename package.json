@@ -1,0 +1,19 @@
+{
+  "name": "cancinosimulator",
+  "version": "1.0.0",
+  "description": "Node Version: 20.19.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.25.1",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.0.0"
+  }
+}
